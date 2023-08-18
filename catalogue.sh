@@ -6,6 +6,7 @@ yum install nodejs -y
 mkdir -p /app
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
 cd /app
+rm -rf /app/*
 unzip /tmp/catalogue.zip
 cd /app
 npm install
