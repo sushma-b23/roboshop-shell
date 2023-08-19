@@ -23,10 +23,6 @@ env=dev
  sed -e "s/IpADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/${COMPONENT}/" -e "s/DOMAIN/${DOMAIN}/" route53.json >/tmp/record.json
  aws rout53 change-resourse-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json 2>/dev/null
 
-  echo "Server Created - SUCCESS - DNS RECORD - ${COMPONENT}.${DOMAIN}"
-
-   echo "Server Created - FAILED - DNS RECORD - ${COMPONENT}.${DOMAIN}"
-    exit 1
 
 }
 
