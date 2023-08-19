@@ -42,6 +42,6 @@ if [ -z "${AMI_ID}" ];then
  fi
 
 for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
-   COMPONENT=${component}-${env}
+   COMPONENT="${component}-${env}""
    create_ec2
 done
