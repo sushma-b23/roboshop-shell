@@ -2,7 +2,7 @@
   "Comment": "CREATE/DELETE/UPSERT a record ",
   "Changes": [{
     "Action":"UPSERT",
-    "ResourceRecordset":{
+    "ResourceRecordSet":{
       "Name": "COMPONENT.DOMAIN",
       "Type": "A",
       "TTL": 30,
