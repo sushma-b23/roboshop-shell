@@ -32,13 +32,12 @@ else
 
 ##Main Program
 AMI_ID=$aws ec2 describe-images --filters "Name=name,values=Centos-8-Devops-Practice" | jq '.Images[].ImageId' | sed -e 's/"//g')
-if [ -z "${AMI_ID}' ];then
+if [ -z "${AMI_ID}" ];then
    echo "AMI_ID not found"
    exit 1
  fi
 
-
- for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
+  for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
    COMPONENT="{component}-${env}"
    create_ec2
   done
