@@ -11,15 +11,15 @@ env=dev
 
  create_ec2() {
   PRIVATE_IP=$(aws ec2 run-instances \
-    --image-id ${AMI_ID} \
-    --instance-type t3.micro \
-    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}, {Key=Monitor,Value=yes}]" "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=${COMPONENT}}]" \
-    --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
-    --security-group-ids ${SGID} \
-    --iam-instance-profile Name=aws_ssm_dev_role \
-    | jq -r '.Instances[].PrivateIpAddress')
+            --image-id ${AMI_ID} \
+            --instance-type t3.micro \
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}, {Key=Monitor,Value=yes}]" "ResourseType=spot-instances-request,Tags=[{Key=Name,Value=${COMPONENT}}]" \
+            --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}"\
+            --security-group-ids ${SGID} \
+            --iam-instance-profile Name=aws_ssm_dev_role \
+         | jq -r '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
-  echo "Private IP address: $PRIVATE_IP"
+      echo "Private IP address: $PRIVATE_IP"
 
 
  sed -e "s/IpADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/${COMPONENT}/" -e "s/DOMAIN/${DOMAIN}/" route53.json >/tmp/record.json
@@ -46,6 +46,6 @@ if [ -z "${AMI_ID}" ];then
  fi
 
 for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
-   COMPONENT="${component}-${env}""
+   COMPONENT="${component}-${env}"
    create_ec2
 done
