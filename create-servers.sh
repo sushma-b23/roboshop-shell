@@ -24,7 +24,7 @@ env=dev
  aws rout53 change-resourse-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json 2>/dev/null
 
   echo "Server Created - SUCCESS - DNS RECORD - ${COMPONENT}.${DOMAIN}"
-else
+
    echo "Server Created - FAILED - DNS RECORD - ${COMPONENT}.${DOMAIN}"
     exit 1
     fi
