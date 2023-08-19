@@ -27,7 +27,7 @@ env=dev
 
    echo "Server Created - FAILED - DNS RECORD - ${COMPONENT}.${DOMAIN}"
     exit 1
-    fi
+
 }
 
 ##Main Program
