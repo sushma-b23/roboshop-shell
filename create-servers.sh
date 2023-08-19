@@ -34,8 +34,7 @@ else
 ##Main Program
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,values=Centos-8-Devops-Practice" | jq '.Images[].ImageId' | sed -e 's/"//g')
 
-   exit 1
- fi
+
 
  SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${SG_NAME} | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')
  if [ -z "${SGID}" ]; then
