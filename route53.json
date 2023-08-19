@@ -1,10 +1,10 @@
 {
   "Comment": "CREATE/DELETE/UPSERT a record ",
   "Changes": [{
-    "Action":"UPSERT"
+    "Action":"UPSERT",
     "ResourceRecordset":{
       "Name": "COMPONENT.DOMAIN",
-      "Type": A,
+      "Type": "A",
       "TTL": 30,
       "ResourceRecords":[{ "Value": "IPADDRESS"}]
     }}]
