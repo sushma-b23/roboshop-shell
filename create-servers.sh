@@ -30,10 +30,7 @@ create_ec2() {
 
 ##Main Program
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-8-Devops-Practice" | jq -r '.Images[].ImageId' | sed -e 's/"//g')
-if [ -z "${AMI_ID}" ]; then
-   echo "AMI_ID not found"
-   exit 1
-fi
+
 
 SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${SG_NAME} | jq -r '.SecurityGroups[].GroupId' | sed -e 's/"//g')
 if [ -z "${SGID}" ]; then
