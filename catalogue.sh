@@ -10,7 +10,7 @@ status_check
 
 print_head "Add Application User"
 id roboshop &>>${LOG}
-if [$? -ne 0]; then
+if [$? -ne 0 ]; then
 useradd roboshop &>>${LOG}
 fi
 
