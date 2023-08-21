@@ -6,14 +6,11 @@ status_check
 print_head "Install NodeJS"
 yum install nodejs -y &>>${LOG}
 status_check
-
-
 print_head "Add Application User"
 id roboshop &>>${LOG}
 if [ $? -ne 0 ]; then
 useradd roboshop &>>${LOG}
 fi
-
 mkdir -p /app &>>${LOG}
 print_head "Downloading App content"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue                                                                             .zip &>>${LOG}
@@ -26,15 +23,12 @@ status_check
 print_head "Extracting App Content"
 rm -rf /app/* &>>${LOG}
 status_check
-
 unzip /tmp/catalogue.zip &>>${LOG}
 status_check
-
 print_head "Installing NodeJS Dependencies"
 cd /app &>>${LOG}
 npm install &>>${LOG}
 status_check
-
 print_head "Configuring Catalogue Service File"
 cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.serv                                                                             ice &>>${LOG}
 status_check
