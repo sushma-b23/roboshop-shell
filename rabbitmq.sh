@@ -16,7 +16,7 @@ print_head "Install Erlang & RabbitMQ"
 yum install erlang rabbitmq-server -y &>>${LOG}
 status_check
 
-print-head "Enable RabbitMQ Server"
+print_head "Enable RabbitMQ Server"
 systemctl enable rabbitmq-server &>>${LOG}
 status_check
 
