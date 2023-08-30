@@ -77,4 +77,8 @@ NODEJS() {
 fi
 }
 
-
+MAVEN() {
+  print_head "Install NodeJS"
+    yum install nodejs -y &>>${LOG}
+    status_check
+}
