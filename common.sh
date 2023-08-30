@@ -78,9 +78,17 @@ fi
 }
 
 MAVEN() {
-  print_head "Install NodeJS"
-    yum install nodejs -y &>>${LOG}
+  print_head "Install Maven"
+    yum install maven -y &>>${LOG}
     status_check
+
+    APP_PREREQ
+    print_head "Build a package"
+    mvn clean package &>>${LOG}
+    status_check
+
+    SYSTEMD_SETUP
+    LOAD_SCHEMA
 }
 
 PYTHON() {
@@ -91,7 +99,7 @@ PYTHON() {
   print_head "Download Dependencies"
   cd /app
   pip3.6 install -r requirements.txt &>>${LOG}
-  ststus_check
+  status_check
 
   print_head "Update passwords in Service File"
   sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${script_location}/files/${component}.service &>>${LOG}
