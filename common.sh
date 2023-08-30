@@ -82,3 +82,20 @@ MAVEN() {
     yum install nodejs -y &>>${LOG}
     status_check
 }
+
+PYTHON() {
+  print_head "Install Python"
+  yum install python36 gcc python3-devel -y &>>${LOG}
+  status_check
+  APP_PREREQ
+  print_head "Download Dependencies"
+  cd /app
+  pip3.6 install -r requirements.txt &>>${LOG}
+  ststus_check
+
+  print_head "Update passwords in Service File"
+  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${script_location}/files/${component}.service &>>${LOG}
+  status_check
+  SYSTEMD_SETUP
+
+}
